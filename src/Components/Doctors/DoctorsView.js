@@ -8,7 +8,7 @@ class DoctorsView extends Component{
             <div>
                 <div className="doctors-view-title">Registered Doctors</div>
                 <Link>Register a New Doctor</Link>
-                {/* <ListOfDoctors/> */}
+                <ListOfDoctors/>
             </div>
         );
     }

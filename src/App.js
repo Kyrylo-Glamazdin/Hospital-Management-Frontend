@@ -56,4 +56,13 @@ class App extends Component {
 
 }
 
-export default App;
+const mapStateToProps = state => {
+  return{
+    doctors: state.doctors,
+    patients: state.patients
+  };
+}
+
+export default connect (mapStateToProps, {
+
+})(App);
