@@ -22,7 +22,6 @@ const mapStateToProps = (state) => {
     };
 }
 
-// export default connect(mapStateToProps, {
+export default connect(mapStateToProps, {
 
-// })(ListOfDoctors);
-export default ListOfDoctors;
+})(ListOfDoctors);
