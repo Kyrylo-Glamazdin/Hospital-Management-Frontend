@@ -1,26 +1,59 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import MainPage from './Components/MainPage.js';
+import DoctorsView from './Components/Doctors/DoctorsView.js';
+import PatientsView from './Components/Patients/PatientsView.js';
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      doctors: [],
+      patients: []
+    }
+
+    this.loadDoctors = this.loadDoctors.bind(this);
+    this.loadPatients = this.loadPatients.bind(this);
+
+  }
+
+
+  //this will be used upon the initial loading of the app. it will load info about doctors and patients from the database
+  componentDidMount(){
+    this.loadDoctors();
+    this.loadPatients();
+  }
+
+  //loads doctors info from the database
+  loadDoctors(){
+    //to be implemented once the database is set up
+  }
+  //loads patients info from the database
+  loadPatients(){
+    //to be implemented once the database is set up
+  }
+
+  render(){
+    //getting components for the router
+    const MainPageComponent = () => (<MainPage/>)
+    const DoctorsViewComponent = () => (<DoctorsView/>)
+    const PatientsViewComponent = () => (<PatientsView/>)
+
+    return( 
+      <div className="main-app">
+        <Router>
+          <Route path = "/" render={MainPageComponent} />
+          <Switch>
+            <Route exact path = "/doctors" component={DoctorsViewComponent} />
+            <Route exact path = "/patients" render={PatientsViewComponent}/>
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
+
 }
 
 export default App;
