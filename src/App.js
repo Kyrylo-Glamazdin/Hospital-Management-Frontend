@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import MainPage from './Components/MainPage.js';
 import DoctorsView from './Components/Doctors/DoctorsView.js';
+import DoctorRegistrationForm from './Components/Doctors/DoctorRegistrationForm.js';
 import PatientsView from './Components/Patients/PatientsView.js';
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
     //getting components for the router
     const MainPageComponent = () => (<MainPage/>)
     const DoctorsViewComponent = () => (<DoctorsView/>)
+    const DoctorRegistrationFormComponent = () => (<DoctorRegistrationForm/>)
     const PatientsViewComponent = () => (<PatientsView/>)
 
     return( 
@@ -47,6 +49,8 @@ class App extends Component {
           <Route path = "/" render={MainPageComponent} />
           <Switch>
             <Route exact path = "/doctors" component={DoctorsViewComponent} />
+            <Route exact path = "/doctorRegistrationForm" component = {DoctorRegistrationFormComponent}/>
+
             <Route exact path = "/patients" render={PatientsViewComponent}/>
           </Switch>
         </Router>

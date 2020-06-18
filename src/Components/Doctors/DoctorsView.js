@@ -7,7 +7,7 @@ class DoctorsView extends Component{
         return(
             <div>
                 <div className="doctors-view-title">Registered Doctors</div>
-                <Link>Register a New Doctor</Link>
+                <Link to="/doctorRegistrationForm">Register a New Doctor</Link>
                 <ListOfDoctors/>
             </div>
         );
