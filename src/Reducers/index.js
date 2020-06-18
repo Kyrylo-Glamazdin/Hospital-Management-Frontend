@@ -12,6 +12,19 @@ const doctorsReducer = (oldDoctors = doctors, action) => {
     switch(action.type){
         case "REGISTER_DOCTOR":
             return oldDoctors.concat(action.payload);
+        case "EDIT_DOCTOR":
+            for (let i = 0; i < oldDoctors.length; i++){
+                if (oldDoctors[i].id === action.payload.id){
+                    oldDoctors[i] = action.payload;
+                    return oldDoctors;
+                }
+            }
+        case "DELETE_DOCTOR":
+            for (let i = 0; i < oldDoctors.length; i++){
+                if (oldDoctors[i].id === action.payload.id){
+                    return oldDoctors.splice(i);
+                }
+            }
         default:
             return oldDoctors;
     }
