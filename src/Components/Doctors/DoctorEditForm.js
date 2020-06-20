@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {registerDoctor} from '../../Actions';
+import {editDoctor} from '../../Actions';
+import {deleteDoctor} from '../../Actions';
 import {Redirect} from 'react-router';
 
-class DoctorRegistrationForm extends Component{
+class DoctorEditForm extends Component{
     constructor(props){
         super(props);
         this.state = {
-            name: "",
-            specialty: "",
-            department: "",
-            phone: "",
+            name: this.props.doctor.name,
+            specialty: this.props.doctor.specialty,
+            department: this.props.doctor.department,
+            phone: this.props.doctor.phone,
             redirect: false
         }
 
@@ -22,12 +23,13 @@ class DoctorRegistrationForm extends Component{
         event.preventDefault();
 
         let updatedDoctorInfo = {
+            id: this.props.doctor.id,
             name: this.state.name,
             specialty: this.state.specialty,
             department: this.state.department,
             phone: this.state.phone
         }
-        this.props.registerDoctor(updatedDoctorInfo);
+        this.props.editDoctor(updatedDoctorInfo);
 
         // PUT request here
         //not working, but works if the line above is commented out??
@@ -63,8 +65,14 @@ class DoctorRegistrationForm extends Component{
                     <label>Emergency Phone Number:
                         <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
                     </label>
-                    <input type="submit" value="Complete Registration"/>
+                    <input type="submit" value="Edit"/>
                 </form>
+                <button onClick={() => {
+                    this.props.deleteDoctor(this.props.doctor);
+                    this.setState({
+                        redirect: true
+                    })
+                    }}>Delete Doctor</button>
             </div>
         );
     }
@@ -77,5 +85,6 @@ const mapStateToProps = state => {
 }
 
 export default connect (mapStateToProps, {
-    registerDoctor
-})(DoctorRegistrationForm);
+    editDoctor,
+    deleteDoctor
+})(DoctorEditForm);
