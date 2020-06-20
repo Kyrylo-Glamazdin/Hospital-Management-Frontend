@@ -60,7 +60,7 @@ class DoctorRegistrationForm extends Component{
                     <label>Department:
                         <input name="department" onChange={this.onChangeHandler} value={this.state.department}/>
                     </label>
-                    <label>Emergeny Phone Number:
+                    <label>Emergency Phone Number:
                         <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
                     </label>
                     <input type="submit" value="Complete Registration"/>

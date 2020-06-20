@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {editDoctor} from '../../Actions';
+import {deleteDoctor} from '../../Actions';
 import {Redirect} from 'react-router';
 
 class DoctorEditForm extends Component{
@@ -61,11 +62,17 @@ class DoctorEditForm extends Component{
                     <label>Department:
                         <input name="department" onChange={this.onChangeHandler} value={this.state.department}/>
                     </label>
-                    <label>Emergeny Phone Number:
+                    <label>Emergency Phone Number:
                         <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
                     </label>
                     <input type="submit" value="Edit"/>
                 </form>
+                <button onClick={() => {
+                    this.props.deleteDoctor(this.props.doctor);
+                    this.setState({
+                        redirect: true
+                    })
+                    }}>Delete Doctor</button>
             </div>
         );
     }
@@ -78,5 +85,6 @@ const mapStateToProps = state => {
 }
 
 export default connect (mapStateToProps, {
-    editDoctor
+    editDoctor,
+    deleteDoctor
 })(DoctorEditForm);

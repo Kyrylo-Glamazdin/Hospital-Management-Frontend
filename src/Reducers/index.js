@@ -20,11 +20,7 @@ const doctorsReducer = (oldDoctors = doctors, action) => {
                 }
             }
         case "DELETE_DOCTOR":
-            for (let i = 0; i < oldDoctors.length; i++){
-                if (oldDoctors[i].id === action.payload.id){
-                    return oldDoctors.splice(i);
-                }
-            }
+            return oldDoctors.filter(doctor => (doctor.id !== action.payload.id));
         default:
             return oldDoctors;
     }
