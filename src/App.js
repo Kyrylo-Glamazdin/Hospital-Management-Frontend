@@ -5,6 +5,9 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import MainPage from './Components/MainPage.js';
 import DoctorsView from './Components/Doctors/DoctorsView.js';
 import DoctorRegistrationForm from './Components/Doctors/DoctorRegistrationForm.js';
+import DoctorEditForm from './Components/Doctors/DoctorEditForm.js';
+import IndividualDoctor from './Components/Doctors/IndividualDoctor.js';
+
 import PatientsView from './Components/Patients/PatientsView.js';
 
 class App extends Component {
@@ -52,6 +55,29 @@ class App extends Component {
             <Route exact path = "/doctorRegistrationForm" component = {DoctorRegistrationFormComponent}/>
 
             <Route exact path = "/patients" render={PatientsViewComponent}/>
+
+            {this.props.doctors.map(doctor => {
+              return(
+                <Route exact path ={"/doctors/" + doctor.id + "/edit"}
+                  render={() => {
+                    return <DoctorEditForm doctor={doctor}/>
+                  }}
+                />
+              );
+            })}
+
+            {this.props.doctors.map(doctor => {
+              return(
+                <Route exact path = {"/doctors/" + doctor.id}
+                  render={() => {
+                  return(
+                    <IndividualDoctor
+                      doctor={doctor}
+                    />
+                  );
+                }}/>
+              );
+            })}
           </Switch>
         </Router>
       </div>
