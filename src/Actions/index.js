@@ -56,14 +56,29 @@ export const deleteSymptom = symptomObj => {
 
 export const addTreatment = treatmentObj => {
     return{
-        type: "ADD_SYMPTOM",
+        type: "ADD_TREATMENT",
         payload: treatmentObj
     };
 };
 
 export const deleteTreatment = treatmentObj => {
     return{
-        type: "ADD_TREATMENT",
+        type: "DELETE_TREATMENT",
         payload: treatmentObj
+    };
+};
+
+
+export const addRelation = relationObj => {
+    return{
+        type: "ADD_RELATION",
+        payload: relationObj
+    };
+};
+
+export const deleteRelation = relationObj => {
+    return{
+        type: "RETURN_RELATION",
+        payload: relationObj
     };
 };

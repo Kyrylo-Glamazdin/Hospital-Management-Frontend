@@ -39,6 +39,13 @@ let treatments = [
     {id: 4, treatment: "TR6"},
 ];
 
+//doctor id is mapped to patient id to see which patient is treated by which doctor
+let doctorPatientRelations = [
+    {dId: 1, pId: 3},
+    {dId: 5, pId: 1},
+    {dId: 3, pId: 2}
+];
+
 let nextDoctorId = 6;
 let nextPatientId = 6;
 
@@ -88,7 +95,7 @@ const symptomsReducer = (oldSymptoms = symptoms, action) => {
         case "ADD_SYMPTOM":
             return oldSymptoms.concat(action.payload);
         case "DELETE_SYMPTOM":
-            return oldSymptoms.filter(symptomObj => (symptomObj.id === action.payload.id && symptomObj.symptom === action.payload.symptom));
+        return oldSymptoms.filter(symptomObj => (symptomObj.id !== action.payload.id || symptomObj.symptom !== action.payload.symptom));
         default:
             return oldSymptoms;
     }
@@ -99,9 +106,20 @@ const treatmentsReducer = (oldTreatments = treatments, action) => {
         case "ADD_TREATMENT":
             return oldTreatments.concat(action.payload);
         case "DELETE_TREATMENT":
-            return oldTreatments.filter(treatmentObj => (treatmentObj.id === action.payload.id && treatmentObj.treatment === action.payload.treatment));
+            return oldTreatments.filter(treatmentObj => (treatmentObj.id !== action.payload.id || treatmentObj.treatment !== action.payload.treatment));
         default:
             return oldTreatments;
+    }
+}
+
+const doctorPatientReducer = (oldRelations = doctorPatientRelations, action) => {
+    switch(action.type){
+        case "ADD_RELATION":
+            return oldRelations.concat(action.payload);
+        case "REMOVE_RELATION":
+            return oldRelations.filter(relationObj => (relationObj.dId !== action.payload.dId || relationObj.pId !== action.payload.pId));
+        default:
+            return oldRelations;
     }
 }
 
@@ -109,5 +127,6 @@ export default combineReducers({
     doctors: doctorsReducer,
     patients: patientsReducer,
     symptoms: symptomsReducer,
-    treatments: treatmentsReducer
+    treatments: treatmentsReducer,
+    doctorPatientRelations: doctorPatientReducer
 });

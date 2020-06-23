@@ -1,0 +1,40 @@
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+class TreatmentList extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            patientTreatments: []
+        }
+    }
+
+    componentDidMount(){
+        let listOfTreatments = this.props.treatments;
+        let listOfPatientTreatments = [];
+        for (let i = 0; i < listOfTreatments.length; i++){
+            if (listOfTreatments[i].id === this.props.patient.id){
+                listOfPatientTreatments.push(listOfTreatments[i].treatment)
+            }
+        }
+        this.setState({
+            patientTreatments: listOfPatientTreatments
+        })
+    }
+
+    render(){
+        return(
+            this.state.patientTreatments.map(treatment => treatment)
+        );
+    }
+}
+
+const mapStateToProps = state => {
+    return({
+        treatments: state.treatments
+    });
+}
+
+export default connect (mapStateToProps,{
+
+})(TreatmentList);
