@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {editPatient} from '../../Actions';
 import {deletePatient} from '../../Actions';
 import {Redirect} from 'react-router';
+import EditSymptomList from './EditSymptomList.js';
+import EditTreatmentList from './EditTreatmentList.js';
 
 class PatientEditForm extends Component{
     constructor(props){
@@ -71,7 +73,11 @@ class PatientEditForm extends Component{
                         <input name="image" onChange={this.onChangeHandler} value={this.state.image}/>
                     </label>
                     <input type="submit" value="Edit"/>
-                </form>
+                </form><br/>
+                {"Symptoms:"}
+                <EditSymptomList patient={this.props.patient}/><br/>
+                {"Treatments:"}
+                <EditTreatmentList patient={this.props.patient}/>
                 <button onClick={() => {
                     this.props.deletePatient(this.props.patient);
                     this.setState({
