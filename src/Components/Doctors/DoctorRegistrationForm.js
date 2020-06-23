@@ -11,6 +11,7 @@ class DoctorRegistrationForm extends Component{
             specialty: "",
             department: "",
             phone: "",
+            iamge: "",
             redirect: false
         }
 
@@ -25,7 +26,8 @@ class DoctorRegistrationForm extends Component{
             name: this.state.name,
             specialty: this.state.specialty,
             department: this.state.department,
-            phone: this.state.phone
+            phone: this.state.phone,
+            image: this.state.image
         }
         this.props.registerDoctor(updatedDoctorInfo);
 
@@ -62,6 +64,9 @@ class DoctorRegistrationForm extends Component{
                     </label>
                     <label>Emergency Phone Number:
                         <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                    </label>
+                    <label>Image:
+                        <input name="image" onChange={this.onChangeHandler} value={this.state.image}/>
                     </label>
                     <input type="submit" value="Complete Registration"/>
                 </form>

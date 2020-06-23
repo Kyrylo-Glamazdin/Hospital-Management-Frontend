@@ -61,7 +61,7 @@ export const addTreatment = treatmentObj => {
     };
 };
 
-export const deleteTreatment = TreatmentObj => {
+export const deleteTreatment = treatmentObj => {
     return{
         type: "ADD_TREATMENT",
         payload: treatmentObj
