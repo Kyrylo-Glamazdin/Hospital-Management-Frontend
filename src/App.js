@@ -3,12 +3,16 @@ import {connect} from 'react-redux';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import MainPage from './Components/MainPage.js';
+
 import DoctorsView from './Components/Doctors/DoctorsView.js';
 import DoctorRegistrationForm from './Components/Doctors/DoctorRegistrationForm.js';
 import DoctorEditForm from './Components/Doctors/DoctorEditForm.js';
 import IndividualDoctor from './Components/Doctors/IndividualDoctor.js';
 
 import PatientsView from './Components/Patients/PatientsView.js';
+import PatientRegistrationForm from './Components/Patients/PatientRegistrationForm.js';
+import PatientEditForm from './Components/Patients/PatientEditForm.js';
+import IndividualPatient from './Components/Patients/IndividualPatient.js';
 
 class App extends Component {
   constructor(props){
@@ -20,6 +24,9 @@ class App extends Component {
 
     this.loadDoctors = this.loadDoctors.bind(this);
     this.loadPatients = this.loadPatients.bind(this);
+    this.loadSymptoms = this.loadSymptoms.bind(this);
+    this.loadDiagnoses = this.loadDiagnoses.bind(this);
+    this.loadPatientDoctorRelations = this.loadPatientDoctorRelations.bind(this);
 
   }
 
@@ -28,6 +35,9 @@ class App extends Component {
   componentDidMount(){
     this.loadDoctors();
     this.loadPatients();
+    this.loadSymptoms();
+    this.loadDiagnoses();
+    this.loadPatientDoctorRelations();
   }
 
   //loads doctors info from the database
@@ -38,13 +48,28 @@ class App extends Component {
   loadPatients(){
     //to be implemented once the database is set up
   }
+  //loads patient symptoms from the database
+  loadSymptoms(){
+
+  }
+  //loads patient diagnoses from the database
+  loadDiagnoses(){
+
+  }
+  //loads relations between doctors and patients
+  loadPatientDoctorRelations(){
+
+  }
 
   render(){
     //getting components for the router
     const MainPageComponent = () => (<MainPage/>)
+
     const DoctorsViewComponent = () => (<DoctorsView/>)
     const DoctorRegistrationFormComponent = () => (<DoctorRegistrationForm/>)
+
     const PatientsViewComponent = () => (<PatientsView/>)
+    const PatientRegistrationFormComponent = () => (<PatientRegistrationForm/>)
 
     return( 
       <div className="main-app">
@@ -55,6 +80,7 @@ class App extends Component {
             <Route exact path = "/doctorRegistrationForm" component = {DoctorRegistrationFormComponent}/>
 
             <Route exact path = "/patients" render={PatientsViewComponent}/>
+            <Route exact path = "/patientRegistrationForm" component = {PatientRegistrationFormComponent}/>
 
             {this.props.doctors.map(doctor => {
               return(
@@ -73,6 +99,29 @@ class App extends Component {
                   return(
                     <IndividualDoctor
                       doctor={doctor}
+                    />
+                  );
+                }}/>
+              );
+            })}
+
+            {this.props.patients.map(patient => {
+              return(
+                <Route exact path ={"/patients/" + patient.id + "/edit"}
+                  render={() => {
+                    return <PatientEditForm patient={patient}/>
+                  }}
+                />
+              );
+            })}
+
+            {this.props.patients.map(patient => {
+              return(
+                <Route exact path = {"/patients/" + patient.id}
+                  render={() => {
+                  return(
+                    <IndividualPatient
+                      patient={patient}
                     />
                   );
                 }}/>

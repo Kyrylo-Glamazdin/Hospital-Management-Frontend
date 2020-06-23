@@ -12,6 +12,7 @@ class DoctorEditForm extends Component{
             specialty: this.props.doctor.specialty,
             department: this.props.doctor.department,
             phone: this.props.doctor.phone,
+            image: this.props.doctor.image,
             redirect: false
         }
 
@@ -27,7 +28,8 @@ class DoctorEditForm extends Component{
             name: this.state.name,
             specialty: this.state.specialty,
             department: this.state.department,
-            phone: this.state.phone
+            phone: this.state.phone,
+            image: this.state.image
         }
         this.props.editDoctor(updatedDoctorInfo);
 
@@ -64,6 +66,9 @@ class DoctorEditForm extends Component{
                     </label>
                     <label>Emergency Phone Number:
                         <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                    </label>
+                    <label>Image:
+                        <input name="image" onChange={this.onChangeHandler} value={this.state.image}/>
                     </label>
                     <input type="submit" value="Edit"/>
                 </form>

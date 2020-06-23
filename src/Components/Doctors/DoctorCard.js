@@ -7,6 +7,7 @@ class DoctorCard extends Component{
             <div>
                 {this.props.doctor.name}<br/>
                 {this.props.doctor.specialty}<br/>
+                {this.props.doctor.department}<br/>
                 {this.props.doctor.phone}<br/>
                 <Link to={"/doctors/" + this.props.doctor.id}>
                     <button>View</button>
