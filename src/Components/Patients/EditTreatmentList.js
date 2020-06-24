@@ -6,36 +6,28 @@ import IndividualTreatment from './IndividualTreatment.js';
 class EditTreatmentList extends PureComponent{
     constructor(props){
         super(props);
-        this.state = {
-            patientTreatments: [],
-            newTreatment: ""
-        }
-    }
-
-    componentDidMount(){
-        let listOfTreatments = this.props.treatments;
-        let listOfPatientTreatments = [];
-        for (let i = 0; i < listOfTreatments.length; i++){
-            if (listOfTreatments[i].id === this.props.patient.id){
-                listOfPatientTreatments.push(listOfTreatments[i].treatment)
-            }
-        }
-        this.setState({
-            patientTreatments: listOfPatientTreatments
-        })
     }
 
     render(){
-        return(
-            this.state.patientTreatments.map(treatment => {
-                let trObj = {id: this.props.patient.id, treatment}
-                return(
-                    <div>
-                        <IndividualTreatment key={trObj.treatment + trObj.id} trObj={trObj} />
-                    </div>
-                );
-            })
-        );
+        let toRender = this.props.treatments.filter(pt => (pt.id === this.props.patient.id));
+        if (toRender.length > 0){
+            return(
+                toRender.map(tr => {
+                    let trObj = {id: this.props.patient.id, treatment:tr.treatment}
+                    return(
+                        <div>
+                            <IndividualTreatment trObj={trObj} />
+                        </div>
+                    );
+                })
+                
+            );
+        }
+        else{
+            return(
+                <div>The patient currently receives no treatments</div>
+            );
+        }
     }
 }
 

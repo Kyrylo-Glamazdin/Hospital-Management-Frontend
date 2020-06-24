@@ -1,31 +1,33 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {deleteSymptom} from '../../Actions';
+import IndividualSymptom from './IndividualSymptom.js';
 
-class EditSymptomList extends Component{
+class EditSymptomList extends PureComponent{
     constructor(props){
         super(props);
-        this.state = {
-            patientSymptoms: []
-        }
-    }
-
-    componentDidMount(){
-        let listOfSymptoms = this.props.symptoms;
-        let listOfPatientSymptoms = [];
-        for (let i = 0; i < listOfSymptoms.length; i++){
-            if (listOfSymptoms[i].id === this.props.patient.id){
-                listOfPatientSymptoms.push(listOfSymptoms[i].symptom)
-            }
-        }
-        this.setState({
-            patientSymptoms: listOfPatientSymptoms
-        })
     }
 
     render(){
-        return(
-            this.state.patientSymptoms.map(symptom => symptom)
-        );
+        let toRender = this.props.symptoms.filter(pt => (pt.id === this.props.patient.id));
+        if (toRender.length > 0){
+            return(
+                toRender.map(tr => {
+                    let trObj = {id: this.props.patient.id, symptom:tr.symptom}
+                    return(
+                        <div>
+                            <IndividualSymptom trObj={trObj} />
+                        </div>
+                    );
+                })
+                
+            );
+        }
+        else{
+            return(
+                <div>The patient currently has no symptoms</div>
+            );
+        }
     }
 }
 
@@ -36,5 +38,5 @@ const mapStateToProps = state => {
 }
 
 export default connect (mapStateToProps,{
-
+    deleteSymptom
 })(EditSymptomList);
