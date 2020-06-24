@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import DoctorPatientList from './DoctorPatientList.js';
 
 class IndividualDoctor extends Component{
     constructor(props){
@@ -16,6 +17,7 @@ class IndividualDoctor extends Component{
                 <Link to={"/doctors/" + this.props.doctor.id + "/edit/"}>
                     <button>Edit</button>
                 </Link>
+                <DoctorPatientList doctor={this.props.doctor}/>
             </div>
         );
     }
