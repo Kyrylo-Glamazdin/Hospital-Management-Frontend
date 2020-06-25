@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {editPatient} from '../../Actions';
 import {deletePatient} from '../../Actions';
+import {deleteRelation} from '../../Actions';
 import {Redirect} from 'react-router';
 import EditSymptomListWrapper from './EditSymptomListWrapper.js';
 import EditTreatmentListWrapper from './EditTreatmentListWrapper.js';
+import EditPatientDoctorCardWrapper from './EditPatientDoctorCardWrapper.js';
 
 class PatientEditForm extends Component{
     constructor(props){
@@ -15,11 +17,17 @@ class PatientEditForm extends Component{
             department: this.props.patient.department,
             phone: this.props.patient.phone,
             image: this.props.patient.image,
+            assignedDoctor: undefined,
+            doctorSet: false,
+            showButton: true,
+            dropdownButton: <div/>,
             redirect: false
         }
 
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
+        this.undoDoctorSelection = this.undoDoctorSelection.bind(this);
+        this.deletePatientRelations = this.deletePatientRelations.bind(this);
     }
 
     onSubmitHandler(event) {
@@ -42,10 +50,22 @@ class PatientEditForm extends Component{
         })
     }
 
+    deletePatientRelations(){
+        let patientRelation = this.props.doctorPatientRelations.filter(relation => (relation.pId === this.props.patient.id));
+        if (patientRelation.length > 0){
+            let relationObj = patientRelation[0];
+            this.props.deleteRelation(relationObj);
+        }
+    }
+
     onChangeHandler(event){
             this.setState({
                 [event.target.name]: event.target.value
             })
+    }
+
+    undoDoctorSelection(){
+        this.setState({doctorSet: false})
     }
 
     render(){
@@ -54,6 +74,33 @@ class PatientEditForm extends Component{
                 <Redirect to="/patients/"/>
             )
         }
+
+        let doctorRelation = this.props.doctorPatientRelations.filter(relation => (relation.pId === this.props.patient.id))[0];
+        let assignedDoctor = undefined;
+        if (doctorRelation.dId !== -1){
+            for (let i = 0; i < this.props.doctors.length; i++){
+                if (this.props.doctors[i].id === doctorRelation.dId){
+                    assignedDoctor = this.props.doctors[i];
+                    if (!this.state.doctorSet){
+                        this.setState({
+                            doctorSet: true,
+                            dropdownButton: <div/>,
+                            assignedDoctor
+                        });
+                    }
+                    break;
+                }
+            }
+        }
+        if (!this.state.doctorSet && this.state.showButton){
+            console.log(this.state.doctorSet)
+            console.log(this.state.showButton)
+            this.setState({
+                dropdownButton: <button>Button</button>, 
+                showButton: false
+            })
+        }
+
         return(
             <div>
                 <form onSubmit={this.onSubmitHandler}>
@@ -78,12 +125,15 @@ class PatientEditForm extends Component{
                 <EditSymptomListWrapper patient={this.props.patient}/><br/>
                 {"Treatments:"}
                 <EditTreatmentListWrapper patient={this.props.patient}/>
+                <EditPatientDoctorCardWrapper doctorSet={this.state.doctorSet} assignedDoctor={assignedDoctor} patient={this.props.patient} undoDoctorSelection={this.undoDoctorSelection}/>
+                
                 <button onClick={() => {
+                    this.deletePatientRelations();
                     this.props.deletePatient(this.props.patient);
                     this.setState({
                         redirect: true
                     })
-                    }}>Delete Patient</button>
+                    }}>Discharge Patient</button>
             </div>
         );
     }
@@ -91,11 +141,14 @@ class PatientEditForm extends Component{
 
 const mapStateToProps = state => {
     return({
-        patients: state.patients
+        patients: state.patients,
+        doctors: state.doctors,
+        doctorPatientRelations: state.doctorPatientRelations
     });
 }
 
 export default connect (mapStateToProps, {
     editPatient,
-    deletePatient
+    deletePatient,
+    deleteRelation
 })(PatientEditForm);

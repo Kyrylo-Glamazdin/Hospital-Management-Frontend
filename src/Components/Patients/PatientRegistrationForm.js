@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {registerPatient} from '../../Actions';
+import {getNextPatientId} from '../../Actions';
+import {addRelation} from '../../Actions';
 import {Redirect} from 'react-router';
 
 class PatientRegistrationForm extends Component{
@@ -24,12 +26,16 @@ class PatientRegistrationForm extends Component{
 
         let updatedPatientInfo = {
             name: this.state.name,
-            specialty: this.state.specialty,
+            diagnosis: this.state.diagnosis,
             department: this.state.department,
             phone: this.state.phone,
             image: this.state.image
         }
+
+        let patientId = this.props.nextPatientId;
         this.props.registerPatient(updatedPatientInfo);
+        let newRelation = {dId: -1, pId: patientId};
+        this.props.addRelation(newRelation);
 
         // PUT request here
         //not working, but works if the line above is commented out??
@@ -56,8 +62,8 @@ class PatientRegistrationForm extends Component{
                     <label>Name:
                         <input name="name" onChange={this.onChangeHandler} value={this.state.name}/>
                     </label>
-                    <label>Specialty:
-                        <input name="specialty" onChange={this.onChangeHandler} value={this.state.specialty}/>
+                    <label>Diagnosis:
+                        <input name="diagnosis" onChange={this.onChangeHandler} value={this.state.diagnosis}/>
                     </label>
                     <label>Department:
                         <input name="department" onChange={this.onChangeHandler} value={this.state.department}/>
@@ -77,10 +83,13 @@ class PatientRegistrationForm extends Component{
 
 const mapStateToProps = state => {
     return({
-        patients: state.patients
+        patients: state.patients,
+        nextPatientId: state.nextPatientId
     });
 }
 
 export default connect (mapStateToProps, {
-    registerPatient
+    registerPatient,
+    getNextPatientId,
+    addRelation
 })(PatientRegistrationForm);
