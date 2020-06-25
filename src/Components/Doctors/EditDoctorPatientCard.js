@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {deleteRelation} from '../../Actions';
+import {addRelation} from '../../Actions';
 import {Link} from 'react-router-dom';
 
 class EditDoctorPatientCard extends Component{
@@ -19,6 +20,9 @@ class EditDoctorPatientCard extends Component{
                 <button onClick={() => {
                     let relationObj = {dId: this.props.doctor.id, pId: this.props.patient.id}
                     this.props.deleteRelation(relationObj);
+                    let emptyRelation = {dId: -1, pId: this.props.patient.id}
+                    this.props.addRelation(emptyRelation);
+                    this.props.undoPatientSelection();
                     }}>Remove From Doctor</button>
             </div>
         );
@@ -32,5 +36,6 @@ const mapStateToProps = state => {
 }
 
 export default connect (mapStateToProps,{
-    deleteRelation
+    deleteRelation,
+    addRelation
 })(EditDoctorPatientCard);

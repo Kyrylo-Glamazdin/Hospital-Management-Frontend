@@ -31,6 +31,8 @@ class DoctorEditForm extends Component{
         this.removePatientFromDoctor = this.removePatientFromDoctor.bind(this);
         this.toggleDropdown = this.toggleDropdown.bind(this);
         this.finishPatientSelection = this.finishPatientSelection.bind(this);
+        this.undoPatientSelection = this.undoPatientSelection.bind(this);
+        this.deleteDoctorRelations = this.deleteDoctorRelations.bind(this);
     }
 
     onSubmitHandler(event) {
@@ -51,6 +53,18 @@ class DoctorEditForm extends Component{
         this.setState({
             redirect: true
         })
+    }
+
+    deleteDoctorRelations(){
+        let doctorRelations = this.props.doctorPatientRelations.filter(relation => (relation.dId === this.props.doctor.id));
+        if (doctorRelations){
+            for (let i = doctorRelations.length - 1; i >= 0; i--){
+                let oldRelationObj = doctorRelations[i];
+                let newRelationObj = {dId: -1, pId: doctorRelations[i].pId}
+                this.props.deleteRelation(oldRelationObj);
+                this.props.addRelation(newRelationObj);
+            }
+        }
     }
 
     onChangeHandler(event){
@@ -113,6 +127,10 @@ class DoctorEditForm extends Component{
         this.toggleDropdown();
     }
 
+    undoPatientSelection(){
+        this.setState({patientsSet: false})
+    }
+
     render(){
         if (this.state.redirect){
             return(
@@ -152,17 +170,18 @@ class DoctorEditForm extends Component{
                     <label>Image:
                         <input name="image" onChange={this.onChangeHandler} value={this.state.image}/>
                     </label>
-                    <input type="submit" value="Edit"/>
+                    <input type="submit" value="Finish Editing"/>
                 </form>
                 <button onClick={() => {
+                    this.deleteDoctorRelations();
                     this.props.deleteDoctor(this.props.doctor);
                     this.setState({
                         redirect: true
                     })
                     }}>Delete Doctor
                 </button>
-                <EditDoctorPatientList doctor={this.props.doctor}/>
-                <button onClick={this.toggleDropdown}>Select Patients</button>
+                <EditDoctorPatientList doctor={this.props.doctor} undoPatientSelection={this.undoPatientSelection}/>
+                <button onClick={this.toggleDropdown}>Add More Patients</button>
                 {this.state.dropdown}
             </div>
         );

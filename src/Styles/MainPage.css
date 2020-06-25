@@ -1,0 +1,41 @@
+.selection-options{
+    height: 70px;
+    background-color: rgb(51, 153, 255);
+
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+
+}
+
+.nav-button-right{
+    color: whitesmoke;
+    text-decoration: none;
+    text-shadow: 1px 1px gray;
+
+    float: right;
+    margin-top: 12px;
+    margin-right: 100px;
+}
+
+.nav-button-right:hover{
+    color: rgb(225, 225, 225);
+}
+
+.nav-button-left{
+    display: inline-block;
+    color: whitesmoke;
+    text-decoration: none;
+    text-shadow: 1px 1px gray;
+
+    margin-left: 100px;
+    margin-top: 12px;
+}
+
+.nav-button-left:hover{
+    color: rgb(225, 225, 225);
+}
+
+.right-buttons{
+    float: right;
+}
