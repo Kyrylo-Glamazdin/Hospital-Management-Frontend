@@ -20,7 +20,7 @@ class EditDoctorPatientList extends Component{
         if (treatedPatients.length > 0){
             return(
                 treatedPatients.map(patient => 
-                    <EditDoctorPatientCard doctor={this.props.doctor} patient={patient}/>
+                    <EditDoctorPatientCard doctor={this.props.doctor} patient={patient} undoPatientSelection={this.props.undoPatientSelection}/>
                 )
             );
         }

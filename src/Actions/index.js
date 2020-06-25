@@ -49,7 +49,7 @@ export const addSymptom = symptomObj => {
 
 export const deleteSymptom = symptomObj => {
     return{
-        type: "ADD_SYMPTOM",
+        type: "DELETE_SYMPTOM",
         payload: symptomObj
     };
 };
@@ -78,7 +78,13 @@ export const addRelation = relationObj => {
 
 export const deleteRelation = relationObj => {
     return{
-        type: "RETURN_RELATION",
+        type: "DELETE_RELATION",
         payload: relationObj
+    };
+};
+
+export const getNextPatientId = () => {
+    return{
+        type: "GET_NEXT_PATIENT_ID"
     };
 };

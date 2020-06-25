@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import DoctorCard from './DoctorCard.js';
+import './../../Styles/Doctors/ListOfDoctors.css';
 
 class ListOfDoctors extends Component{
     constructor(props){

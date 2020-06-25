@@ -1,11 +1,12 @@
 import {combineReducers} from 'redux';
+import standard_doctor_image_1 from '../Styles/Images/standard_doc_img_1.png';
 
 let doctors = [
-    {id: 1, name: "Doctor 1", specialty: "Neurologist", department: "Neurology", phone: "212-632-1923", image: ""},
-    {id: 2, name: "Doctor 2", specialty: "Dermatologist", department: "Dermatology", phone: "718-773-6236", image: ""},
-    {id: 3, name: "Doctor 3", specialty: "Psychologist", department: "Psychology" ,phone: "929-645-2145", image: ""},
-    {id: 4, name: "Doctor 4", specialty: "Surgeon", department: "Department of Surgery", phone: "347-153-7453", image: ""},
-    {id: 5, name: "Doctor 5", specialty: "Pediatrician", department: "Family Medicine", phone: "212-126-1753", image: ""}
+    {id: 1, name: "Doctor 1", specialty: "Neurologist", department: "Neurology", phone: "212-632-1923", email: "doctor@doctormail.com", image: standard_doctor_image_1},
+    {id: 2, name: "Doctor 2", specialty: "Dermatologist", department: "Dermatology", phone: "718-773-6236", email: "doctor@doctormail.com", image: standard_doctor_image_1},
+    {id: 3, name: "Doctor 3", specialty: "Psychologist", department: "Psychology" ,phone: "929-645-2145", email: "doctor@doctormail.com", image: standard_doctor_image_1},
+    {id: 4, name: "Doctor 4", specialty: "Surgeon", department: "Department of Surgery", phone: "347-153-7453", email: "doctor@doctormail.com", image: standard_doctor_image_1},
+    {id: 5, name: "Doctor 5", specialty: "Pediatrician", department: "Family Medicine", phone: "212-126-1753", email: "doctor@doctormail.com", image: standard_doctor_image_1}
 ];
 
 let patients = [
@@ -42,6 +43,8 @@ let treatments = [
 //doctor id is mapped to patient id to see which patient is treated by which doctor
 let doctorPatientRelations = [
     {dId: 1, pId: 3},
+    {dId: 1, pId: 4},
+    {dId: -1, pId: 5},
     {dId: 5, pId: 1},
     {dId: 3, pId: 2}
 ];
@@ -116,10 +119,19 @@ const doctorPatientReducer = (oldRelations = doctorPatientRelations, action) => 
     switch(action.type){
         case "ADD_RELATION":
             return oldRelations.concat(action.payload);
-        case "REMOVE_RELATION":
+        case "DELETE_RELATION":
             return oldRelations.filter(relationObj => (relationObj.dId !== action.payload.dId || relationObj.pId !== action.payload.pId));
         default:
             return oldRelations;
+    }
+}
+
+const nextPatientIdReducer = (oldPatientId = nextPatientId, action) => {
+    switch(action.type){
+        case "GET_NEXT_PATIENT_ID":
+            return oldPatientId;
+        default:
+            return oldPatientId;
     }
 }
 
@@ -128,5 +140,6 @@ export default combineReducers({
     patients: patientsReducer,
     symptoms: symptomsReducer,
     treatments: treatmentsReducer,
-    doctorPatientRelations: doctorPatientReducer
+    doctorPatientRelations: doctorPatientReducer,
+    nextPatientId: nextPatientIdReducer
 });
