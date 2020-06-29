@@ -80,3 +80,7 @@
     flex-direction: column;
     align-items: center;
 }
+
+.doctors-patient-view-list{
+    width: 51%;
+}

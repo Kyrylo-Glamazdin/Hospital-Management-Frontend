@@ -1,0 +1,144 @@
+.patient-edit-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 30px;
+}
+
+.patient-edit-standard-input{
+    width: 1000px;
+    height: 30px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+
+    border: solid 2px rgb(51, 153, 255);
+
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    border-radius: 7px;
+}
+
+.patient-edit-confirm-button{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    background-color: rgb(51, 153, 255);
+    border-radius: 50px;
+    color: whitesmoke;
+    text-decoration: none;
+    padding-top: 2px;
+    border: none;
+    margin-right: 50px;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.patient-edit-confirm-button:hover{
+    background-color: rgb(37, 127, 216);
+}
+
+.patient-edit-standard-label{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    margin-top: 5px;
+}
+
+.patient-edit-delete-button{
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    background-color: rgb(230, 0, 0);
+    border-radius: 50px;
+    color: whitesmoke;
+    text-decoration: none;
+    padding-top: 2px;
+    border: none;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.patient-edit-delete-button:hover{
+    background-color: rgb(208, 2, 2);
+}
+
+.patient-edit-buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.assigned-doctor-header{
+    font-size: 30px;
+}
+
+.doctor-selection-section{
+    width: 50%;
+}
+
+.individual-patient-image{
+    width: 20;
+    height: 20;
+}
+
+.edit-patient-symptoms-and-treatments-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 49%;
+
+    margin-top: 15px;
+}
+
+.edit-patient-symptoms-and-treatments{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.edit-patient-treatment-list{
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    border-radius: 20px;
+    padding: 1%;
+    width: 50%;
+}
+
+.edit-patient-individual-patient-individual-treatment{
+    margin-top: 5px;
+    background-color: whitesmoke;
+    width: 100%;
+    border-radius: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.edit-patient-patient-props-image{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-top: 5px;
+}
+
+.edit-patient-patient-text-props{
+    width: 90%;
+    float: right;
+    margin-top: 9px;
+}

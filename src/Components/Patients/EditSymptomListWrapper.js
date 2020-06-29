@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {addSymptom} from '../../Actions';
 import EditSymptomList from './EditSymptomList.js';
+import '../../Styles/Patients/EditTreatmentListWrapper.css';
 
 class EditSymptomListWrapper extends PureComponent{
     constructor(props){
@@ -30,14 +31,14 @@ class EditSymptomListWrapper extends PureComponent{
 
     render(){
         return(
-            <div>
+            <div className="treatment-edit-wrapper">
                 <EditSymptomList patient={this.props.patient}/>
                 <form onSubmit={this.onSubmitHandler}>
-                    <label>Add New Symptom:
-                        <input name="newSymptom" onChange={this.onChangeHandler} value={this.state.newSymptom}/>
+                    <label className="standard-treatment-label">Add New Symptom:
+                        <input className="standard-treatment-input" name="newSymptom" onChange={this.onChangeHandler} value={this.state.newSymptom}/>
                     </label>
-                    <input type="submit" value="Add Symptom"/>
-                </form><br/>
+                    <input className="add-treatment-button" type="submit" value="Add Symptom"/>
+                </form>
             </div>
         );
     }

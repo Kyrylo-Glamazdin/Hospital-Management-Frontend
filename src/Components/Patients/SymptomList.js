@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import '../../Styles/Patients/IndividualPatient.css';
+import symptom_image from '../../Styles/Images/symptom_default_image.jpg';
 
 class SymptomList extends Component{
     constructor(props){
@@ -24,7 +26,12 @@ class SymptomList extends Component{
 
     render(){
         return(
-            this.state.patientSymptoms.map(symptom => symptom)
+            this.state.patientSymptoms.map(symptom => 
+                <div className="individual-patient-individual-treatment">
+                    <img className="patient-props-image" src = {symptom_image}/>
+                    <div className="patient-text-props">
+                    {symptom}</div>
+                    </div>)
         );
     }
 }

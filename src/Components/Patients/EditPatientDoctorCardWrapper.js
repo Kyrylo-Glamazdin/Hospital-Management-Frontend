@@ -4,6 +4,7 @@ import {addRelation} from '../../Actions';
 import {deleteRelation} from '../../Actions';
 import EditPatientDoctorCard from './EditPatientDoctorCard.js';
 import PatientDropdownDoctorCard from './PatientDropdownDoctorCard.js';
+import '../../Styles/Patients/PatientDropdownDoctorCard.css';
 
 class EditPatientDoctorCardWrapper extends Component{
     constructor(props){
@@ -55,13 +56,14 @@ class EditPatientDoctorCardWrapper extends Component{
         else{
             this.setState({
                 showDoctors: !this.state.showDoctors,
-                doctorsList: <div>
+                doctorsList: <div className="sorted-doctors-list">
+                    <div className="sorted-doctors-list">
                         {this.state.sortedDoctors.map(doctor => 
                             <PatientDropdownDoctorCard doctor={doctor} doctorSelect={this.doctorSelect} selectedDoctor={this.state.selectedDoctor} />
                         )}
-                        <button onClick={this.assignDoctor}>
+                        <button className="assign-doctor-button" onClick={this.assignDoctor}>
                             Assign Doctor
-                        </button>
+                        </button></div>
                     </div>
             })
         }
@@ -76,8 +78,8 @@ class EditPatientDoctorCardWrapper extends Component{
         else{
             return(
                 <div>
-                    <div>This patient has no assigned doctor</div>
-                    <button onClick={this.toggleShowDoctors}>
+                    <div className="no-assigned-doctor">This patient has no assigned doctor</div>
+                    <button className="assign-doctor-button" onClick={this.toggleShowDoctors}>
                         Add Doctor to Patient
                     </button>
                     {this.state.doctorsList}

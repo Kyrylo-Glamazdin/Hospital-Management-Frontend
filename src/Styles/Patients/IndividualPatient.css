@@ -1,0 +1,75 @@
+.individual-patient-image{
+    width: 20;
+    height: 20;
+}
+
+.symptoms-and-treatments-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 15px;
+}
+
+.symptoms-and-treatments{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.treatment-list{
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    border-radius: 20px;
+    padding: 1%;
+    width: 50%;
+}
+
+.individual-patient-individual-treatment{
+    margin-top: 5px;
+    background-color: whitesmoke;
+    width: 100%;
+    border-radius: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.patient-props-image{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-top: 5px;
+}
+
+.patient-text-props{
+    width: 90%;
+    float: right;
+    margin-top: 9px;
+}
+
+.delete-treatment-button{
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 37px;
+    background-color: rgb(230, 0, 0);
+    border-radius: 50px;
+    color: whitesmoke;
+    text-decoration: none;
+    border: none;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+
+
+.delete-treatment-button:hover{
+    background-color: rgb(208, 2, 2);
+}
