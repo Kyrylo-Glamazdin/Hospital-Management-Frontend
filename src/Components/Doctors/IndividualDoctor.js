@@ -37,6 +37,8 @@ class IndividualDoctor extends Component{
                     </div>
                 </div>
                 <div className="doctor-card-profile-container">
+                    <div className="doctors-patients">Doctor's Patients
+                    </div>
                     <DoctorPatientList className="list-of-patients" doctor={this.props.doctor}/>
                 </div>
             </div>

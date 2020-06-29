@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PatientCard from './PatientCard.js';
+import './../../Styles/Doctors/ListOfDoctors.css';
 
 class ListOfPatients extends Component{
     constructor(props){
@@ -9,7 +10,7 @@ class ListOfPatients extends Component{
 
     render(){
         return(
-            <div className="patients-list">
+            <div className="doctors-list">
                 {this.props.patients.map(patient => (<PatientCard patient={patient}/>))}
             </div>
         );

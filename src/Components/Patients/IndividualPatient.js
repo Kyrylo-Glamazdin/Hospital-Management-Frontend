@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import SymptomList from './SymptomList.js';
 import TreatmentList from './TreatmentList.js';
 import PatientDoctorCard from './PatientDoctorCard.js';
+import '../../Styles/Doctors/IndividualDoctor.css';
+import '../../Styles/Patients/IndividualPatient.css';
 
 class IndividualPatient extends Component{
     constructor(props){
@@ -24,23 +26,45 @@ class IndividualPatient extends Component{
 
         return(
             <div>
-                {this.props.patient.name}
-                {this.props.patient.diagnosis}
-                {this.props.patient.department}
-                {this.props.patient.phone}<br/>
-                {"Symptoms:"}
-                <SymptomList patient={this.props.patient}/><br/>
-                {"Treatments:"}
-                <TreatmentList patient={this.props.patient}/>
-                <div>
-                    <div>
-                        Assigned Doctor
+                <div className="doctor-card-profile-container">
+                    <div className="doctor-card-profile">
+                        <img className="doctor-profile-image" src = {this.props.patient.image}/>
+                        <div className="doctor-profile-text-section">
+                            <Link to={"/patients/" + this.props.patient.id + "/edit/"}>
+                                <button className="edit-button">Edit</button>
+                            </Link>
+                            <div className="doctor-name">
+                                {this.props.patient.name}
+                            </div>
+                            <div className="doctor-specialty">
+                                Diagnosis: {this.props.patient.diagnosis}
+                            </div>
+                            <div className="doctor-department">
+                                Department: {this.props.patient.department}
+                            </div>
+                            <div className="contact-section">
+                                <div className="phone-num">
+                                    Emergency Contact: {this.props.patient.phone}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="doctor-card-profile-container">
+                    <div className="doctors-patients">Assigned Doctor
                     </div>
                     <PatientDoctorCard doctor={assignedDoctor}/>
                 </div>
-                <Link to={"/patients/" + this.props.patient.id + "/edit/"}>
-                    <button>Edit</button>
-                </Link>
+                <div className="symptoms-and-treatments-container">
+                    <div className="symptoms-and-treatments">
+                        <div className="treatment-list">Symptoms:
+                            <SymptomList patient={this.props.patient}/>
+                        </div>
+                        <div className="treatment-list">Treatments:
+                        <TreatmentList patient={this.props.patient}/>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

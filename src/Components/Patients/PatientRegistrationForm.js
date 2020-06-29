@@ -4,6 +4,7 @@ import {registerPatient} from '../../Actions';
 import {getNextPatientId} from '../../Actions';
 import {addRelation} from '../../Actions';
 import {Redirect} from 'react-router';
+import '../../Styles/Doctors/DoctorRegistrationForm.css';
 
 class PatientRegistrationForm extends Component{
     constructor(props){
@@ -58,23 +59,33 @@ class PatientRegistrationForm extends Component{
         }
         return(
             <div>
-                <form onSubmit={this.onSubmitHandler}>
-                    <label>Name:
-                        <input name="name" onChange={this.onChangeHandler} value={this.state.name}/>
+                <form className="doctor-registration-form" onSubmit={this.onSubmitHandler}>
+                    <label className="standard-label">Name:
+                        <div>
+                            <input className="standard-input" name="name" onChange={this.onChangeHandler} value={this.state.name}/>
+                        </div>
                     </label>
-                    <label>Diagnosis:
-                        <input name="diagnosis" onChange={this.onChangeHandler} value={this.state.diagnosis}/>
+                    <label className="standard-label">Diagnosis:
+                        <div>
+                            <input className="standard-input" name="diagnosis" onChange={this.onChangeHandler} value={this.state.diagnosis}/>
+                        </div>
                     </label>
-                    <label>Department:
-                        <input name="department" onChange={this.onChangeHandler} value={this.state.department}/>
+                    <label className="standard-label">Department:
+                        <div>
+                            <input className="standard-input" name="department" onChange={this.onChangeHandler} value={this.state.department}/>
+                        </div>
                     </label>
-                    <label>Phone Number:
-                        <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                    <label className="standard-label">Phone Number:
+                        <div>
+                            <input className="standard-input" name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                        </div>
                     </label>
-                    <label>Image:
-                        <input name="image" onChange={this.onChangeHandler} value={this.state.image}/>
+                    <label className="standard-label">Image:
+                        <div>
+                            <input className="standard-input" name="image" onChange={this.onChangeHandler} value={this.state.image}/>
+                        </div>
                     </label>
-                    <input type="submit" value="Complete Registration"/>
+                    <input className="confirm-button" type="submit" value="Complete Registration"/>
                 </form>
             </div>
         );

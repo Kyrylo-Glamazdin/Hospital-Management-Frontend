@@ -207,7 +207,9 @@ class DoctorEditForm extends Component{
                     }}>Delete Doctor
                 </button>
                 </form>
-                <EditDoctorPatientList doctor={this.props.doctor} undoPatientSelection={this.undoPatientSelection}/>
+                <div className="doctors-patient-view-list">
+                    <EditDoctorPatientList doctor={this.props.doctor} undoPatientSelection={this.undoPatientSelection}/>
+                </div>
                 <button className="add-patients-to-doctor-button" onClick={this.toggleDropdown}>Add More Patients</button>
                 <div className="doctor-dropdown-container">
                     {this.state.dropdown}
