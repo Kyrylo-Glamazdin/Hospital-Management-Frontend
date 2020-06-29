@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {registerDoctor} from '../../Actions';
 import {Redirect} from 'react-router';
+import '../../Styles/Doctors/DoctorRegistrationForm.css';
 
 class DoctorRegistrationForm extends Component{
     constructor(props){
@@ -11,7 +12,8 @@ class DoctorRegistrationForm extends Component{
             specialty: "",
             department: "",
             phone: "",
-            iamge: "",
+            email: "",
+            image: "",
             redirect: false
         }
 
@@ -27,6 +29,7 @@ class DoctorRegistrationForm extends Component{
             specialty: this.state.specialty,
             department: this.state.department,
             phone: this.state.phone,
+            email: this.state.email,
             image: this.state.image
         }
         this.props.registerDoctor(updatedDoctorInfo);
@@ -52,23 +55,38 @@ class DoctorRegistrationForm extends Component{
         }
         return(
             <div>
-                <form onSubmit={this.onSubmitHandler}>
-                    <label>Name:
-                        <input name="name" onChange={this.onChangeHandler} value={this.state.name}/>
+                <form className="doctor-registration-form" onSubmit={this.onSubmitHandler}>
+                    <label className="standard-label">Name:
+                        <div>
+                            <input className="standard-input" name="name" onChange={this.onChangeHandler} value={this.state.name}/>
+                        </div>
                     </label>
-                    <label>Specialty:
-                        <input name="specialty" onChange={this.onChangeHandler} value={this.state.specialty}/>
+                    <label className="standard-label">Specialty:
+                        <div>
+                            <input className="standard-input" name="specialty" onChange={this.onChangeHandler} value={this.state.specialty}/>
+                        </div>
                     </label>
-                    <label>Department:
-                        <input name="department" onChange={this.onChangeHandler} value={this.state.department}/>
+                    <label className="standard-label">Department:
+                        <div>
+                            <input className="standard-input" name="department" onChange={this.onChangeHandler} value={this.state.department}/>
+                        </div>
                     </label>
-                    <label>Emergency Phone Number:
-                        <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                    <label className="standard-label">Emergency Phone Number:
+                        <div>
+                            <input className="standard-input" name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                        </div>
                     </label>
-                    <label>Image:
-                        <input name="image" onChange={this.onChangeHandler} value={this.state.image}/>
+                    <label className="standard-label">Email:
+                        <div>
+                            <input className="standard-input" name="email" onChange={this.onChangeHandler} value={this.state.email}/>
+                        </div>
                     </label>
-                    <input type="submit" value="Complete Registration"/>
+                    <label className="standard-label">Image:
+                        <div>
+                            <input className="standard-input" name="image" onChange={this.onChangeHandler} value={this.state.image}/>
+                        </div>
+                    </label>
+                    <input className="confirm-button" type="submit" value="Complete Registration"/>
                 </form>
             </div>
         );
