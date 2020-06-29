@@ -7,6 +7,8 @@ import {deleteRelation} from '../../Actions';
 import {Redirect} from 'react-router';
 import EditDoctorPatientList from './EditDoctorPatientList.js';
 import DoctorDropdownPatientCard from './DoctorDropdownPatientCard.js';
+import '../../Styles/Doctors/DoctorRegistrationForm.css';
+import '../../Styles/Doctors/DoctorEditForm.css';
 
 class DoctorEditForm extends Component{
     constructor(props){
@@ -16,7 +18,8 @@ class DoctorEditForm extends Component{
             specialty: this.props.doctor.specialty,
             department: this.props.doctor.department,
             phone: this.props.doctor.phone,
-            image: this.props.doctor.image,
+            email: this.props.doctor.email,
+            image: "",
             selectedPatients: [],
             dropdownOpen: false,
             dropdown: <div/>,
@@ -38,13 +41,22 @@ class DoctorEditForm extends Component{
     onSubmitHandler(event) {
         event.preventDefault();
 
+        let docImg = "";
+        if (this.state.image === ""){
+            docImg = this.props.doctor.image
+        }
+
         let updatedDoctorInfo = {
             id: this.props.doctor.id,
             name: this.state.name,
             specialty: this.state.specialty,
             department: this.state.department,
             phone: this.state.phone,
+            email: this.state.email,
             image: this.state.image
+        }
+        if (docImg !== ""){
+            updatedDoctorInfo.image = docImg
         }
         this.props.editDoctor(updatedDoctorInfo);
 
@@ -87,16 +99,16 @@ class DoctorEditForm extends Component{
     }
 
     toggleDropdown(){
-        let customDropdown = <div>There are no patients without a doctor</div>
+        let customDropdown = <div className="dropdown-patients">There are no patients without a doctor</div>
         if (this.state.patientsWithNoDoctor.length > 0){
-            customDropdown = <div>
+            customDropdown = <div className="dropdown-patients">
                     {this.state.patientsWithNoDoctor.map(patient => (
                         <DoctorDropdownPatientCard key={"dropdown"+patient.id} 
                         addPatientToDoctor={this.addPatientToDoctor} 
                         removePatientFromDoctor = {this.removePatientFromDoctor}
                         patient={patient}/>
                     ))}
-                    <button onClick={this.finishPatientSelection}>Add Patients to Doctor</button>
+                    <button className="add-patients-to-doctor-button" onClick={this.finishPatientSelection}>Add Patients to Doctor</button>
             </div>
         }
         if (this.state.dropdownOpen){
@@ -153,26 +165,40 @@ class DoctorEditForm extends Component{
             })
         }
         return(
-            <div>
-                <form onSubmit={this.onSubmitHandler}>
-                    <label>Name:
-                        <input name="name" onChange={this.onChangeHandler} value={this.state.name}/>
+            <div className="main-doctor-edit-container">
+                <form className="doctor-edit-form" onSubmit={this.onSubmitHandler}>
+                <label className="standard-label">Name:
+                        <div>
+                            <input className="standard-input" name="name" onChange={this.onChangeHandler} value={this.state.name}/>
+                        </div>
                     </label>
-                    <label>Specialty:
-                        <input name="specialty" onChange={this.onChangeHandler} value={this.state.specialty}/>
+                    <label className="standard-label">Specialty:
+                        <div>
+                            <input className="standard-input" name="specialty" onChange={this.onChangeHandler} value={this.state.specialty}/>
+                        </div>
                     </label>
-                    <label>Department:
-                        <input name="department" onChange={this.onChangeHandler} value={this.state.department}/>
+                    <label className="standard-label">Department:
+                        <div>
+                            <input className="standard-input" name="department" onChange={this.onChangeHandler} value={this.state.department}/>
+                        </div>
                     </label>
-                    <label>Emergency Phone Number:
-                        <input name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                    <label className="standard-label">Emergency Phone Number:
+                        <div>
+                            <input className="standard-input" name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                        </div>
                     </label>
-                    <label>Image:
-                        <input name="image" onChange={this.onChangeHandler} value={this.state.image}/>
+                    <label className="standard-label">Email:
+                        <div>
+                            <input className="standard-input" name="email" onChange={this.onChangeHandler} value={this.state.email}/>
+                        </div>
                     </label>
-                    <input type="submit" value="Finish Editing"/>
-                </form>
-                <button onClick={() => {
+                    <label className="standard-label">Image:
+                        <div>
+                            <input className="standard-input" name="image" onChange={this.onChangeHandler} value={this.state.image}/>
+                        </div>
+                    </label>
+                    <input className="standard-doctor-edit-button" type="submit" value="Finish Editing"/>
+                    <button className="standard-doctor-delete-button" onClick={() => {
                     this.deleteDoctorRelations();
                     this.props.deleteDoctor(this.props.doctor);
                     this.setState({
@@ -180,9 +206,12 @@ class DoctorEditForm extends Component{
                     })
                     }}>Delete Doctor
                 </button>
+                </form>
                 <EditDoctorPatientList doctor={this.props.doctor} undoPatientSelection={this.undoPatientSelection}/>
-                <button onClick={this.toggleDropdown}>Add More Patients</button>
-                {this.state.dropdown}
+                <button className="add-patients-to-doctor-button" onClick={this.toggleDropdown}>Add More Patients</button>
+                <div className="doctor-dropdown-container">
+                    {this.state.dropdown}
+                </div>
             </div>
         );
     }

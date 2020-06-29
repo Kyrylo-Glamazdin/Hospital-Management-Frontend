@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import DoctorPatientCard from './DoctorPatientCard.js';
+import '../../Styles/Doctors/DoctorPatientList.css';
 
 class DoctorPatientList extends Component{
     constructor(props){
@@ -20,13 +21,13 @@ class DoctorPatientList extends Component{
         if (treatedPatients.length > 0){
             return(
                 treatedPatients.map(patient => 
-                    <DoctorPatientCard doctor={this.props.doctor} patient={patient}/>
+                    <DoctorPatientCard className="individual-patient-card" doctor={this.props.doctor} patient={patient}/>
                 )
             );
         }
         else{
             return(
-                <div>This doctor currently has no patients</div>
+                <div className="no-patients-list">This doctor currently has no patients</div>
             );
         }
     }
