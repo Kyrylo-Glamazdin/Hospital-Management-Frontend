@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/css/main.9c020c33.chunk.css",
+    "main.js": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/js/main.53090462.chunk.js",
+    "main.js.map": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/js/main.53090462.chunk.js.map",
+    "runtime-main.js": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/js/runtime-main.a64af7bb.js",
+    "runtime-main.js.map": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/js/runtime-main.a64af7bb.js.map",
+    "static/js/2.1b4f6a64.chunk.js": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/js/2.1b4f6a64.chunk.js",
+    "static/js/2.1b4f6a64.chunk.js.map": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/js/2.1b4f6a64.chunk.js.map",
+    "index.html": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/index.html",
+    "precache-manifest.0db19105e0c06a2aa0544b104f819bfb.js": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/precache-manifest.0db19105e0c06a2aa0544b104f819bfb.js",
+    "service-worker.js": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/service-worker.js",
+    "static/css/main.9c020c33.chunk.css.map": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/css/main.9c020c33.chunk.css.map",
+    "static/js/2.1b4f6a64.chunk.js.LICENSE.txt": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/js/2.1b4f6a64.chunk.js.LICENSE.txt",
+    "static/media/patient-standard-img.png": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/media/patient-standard-img.adcd2b36.png",
+    "static/media/standard_doc_img_1.png": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/media/standard_doc_img_1.63a07a67.png",
+    "static/media/symptom_default_image.jpg": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/media/symptom_default_image.8bae96e2.jpg",
+    "static/media/treatment_default_image.png": "/Kyrylo-Glamazdin/Hospital-Management-Frontend/static/media/treatment_default_image.7ae17b8c.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a64af7bb.js",
+    "static/js/2.1b4f6a64.chunk.js",
+    "static/css/main.9c020c33.chunk.css",
+    "static/js/main.53090462.chunk.js"
+  ]
+}
