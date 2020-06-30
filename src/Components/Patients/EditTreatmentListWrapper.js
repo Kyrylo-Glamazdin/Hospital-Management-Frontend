@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {addTreatment} from '../../Actions';
+import axios from 'axios';
 import EditTreatmentList from './EditTreatmentList.js';
 import '../../Styles/Patients/EditTreatmentListWrapper.css';
 
@@ -20,6 +21,12 @@ class EditTreatmentListWrapper extends PureComponent{
         let patientId = this.props.patient.id;
         let newTreatmentObj = {id: patientId, treatment: enteredTreatment}
         this.props.addTreatment(newTreatmentObj);
+
+        axios.post('http://localhost:4100/api/treatments', newTreatmentObj)
+            .then(res => {
+                console.log(res)
+            })
+
         this.setState({newTreatment: ""})
     }
 

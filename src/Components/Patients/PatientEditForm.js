@@ -4,6 +4,7 @@ import {editPatient} from '../../Actions';
 import {deletePatient} from '../../Actions';
 import {deleteRelation} from '../../Actions';
 import {Redirect} from 'react-router';
+import axios from 'axios';
 import EditSymptomListWrapper from './EditSymptomListWrapper.js';
 import EditTreatmentListWrapper from './EditTreatmentListWrapper.js';
 import EditPatientDoctorCardWrapper from './EditPatientDoctorCardWrapper.js';
@@ -17,6 +18,7 @@ class PatientEditForm extends Component{
             diagnosis: this.props.patient.diagnosis,
             department: this.props.patient.department,
             phone: this.props.patient.phone,
+            email: this.props.patient.email,
             image: "",
             assignedDoctor: undefined,
             doctorSet: false,
@@ -40,6 +42,7 @@ class PatientEditForm extends Component{
             diagnosis: this.state.diagnosis,
             department: this.state.department,
             image: this.props.patient.image,
+            email: this.state.email,
             phone: this.state.phone
         }
 
@@ -49,7 +52,12 @@ class PatientEditForm extends Component{
 
         this.props.editPatient(updatedPatientInfo);
 
-        // PUT request here
+        axios.put('http://localhost:4100/api/patients/' + updatedPatientInfo.id, updatedPatientInfo)
+        .then(res => {
+            console.log(res)
+        })
+
+
         this.setState({
             redirect: true
         })
@@ -82,7 +90,7 @@ class PatientEditForm extends Component{
 
         let doctorRelation = this.props.doctorPatientRelations.filter(relation => (relation.pId === this.props.patient.id))[0];
         let assignedDoctor = undefined;
-        if (doctorRelation.dId !== -1){
+        if (doctorRelation && doctorRelation.dId !== -1){
             for (let i = 0; i < this.props.doctors.length; i++){
                 if (this.props.doctors[i].id === doctorRelation.dId){
                     assignedDoctor = this.props.doctors[i];
@@ -127,6 +135,11 @@ class PatientEditForm extends Component{
                     <label className="patient-edit-standard-label">Phone Number:
                         <div>
                             <input className="patient-edit-standard-input" name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                        </div>
+                    </label>
+                    <label className="patient-edit-standard-label">Email:
+                        <div>
+                            <input className="patient-edit-standard-input" name="email" onChange={this.onChangeHandler} value={this.state.email}/>
                         </div>
                     </label>
                     <label className="patient-edit-standard-label">Image:

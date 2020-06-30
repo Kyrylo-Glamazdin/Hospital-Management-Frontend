@@ -4,6 +4,7 @@ import {registerPatient} from '../../Actions';
 import {getNextPatientId} from '../../Actions';
 import {addRelation} from '../../Actions';
 import {Redirect} from 'react-router';
+import axios from 'axios';
 import '../../Styles/Doctors/DoctorRegistrationForm.css';
 
 class PatientRegistrationForm extends Component{
@@ -14,6 +15,7 @@ class PatientRegistrationForm extends Component{
             diagnosis: "",
             department: "",
             phone: "",
+            email: "",
             image: "",
             redirect: false
         }
@@ -30,16 +32,37 @@ class PatientRegistrationForm extends Component{
             diagnosis: this.state.diagnosis,
             department: this.state.department,
             phone: this.state.phone,
+            email: this.state.email,
             image: this.state.image
         }
 
-        let patientId = this.props.nextPatientId;
-        this.props.registerPatient(updatedPatientInfo);
-        let newRelation = {dId: -1, pId: patientId};
-        this.props.addRelation(newRelation);
+        axios.post('http://localhost:4100/api/patients', {
+            name: this.state.name,
+            diagnosis: this.state.diagnosis,
+            department: this.state.department,
+            phone: this.state.phone,
+            email: this.state.email,
+            image: this.state.image
+        })
+        .then(res => {
+            console.log(res)
+        })
 
-        // PUT request here
-        //not working, but works if the line above is commented out??
+        axios.get('http://localhost:4100/api/lastPatId')
+        .then(res => {
+            updatedPatientInfo.id = res.data[0].lastId;
+            console.log(updatedPatientInfo.id)
+            this.props.registerPatient(updatedPatientInfo);
+            let newRelation = {dId: -1, pId: updatedPatientInfo.id};
+            this.props.addRelation(newRelation);
+
+            axios.post('http://localhost:4100/api/doctorPatients', newRelation)
+            .then(res => {
+                console.log(res)
+            })
+        })
+
+        
         this.setState({
             redirect: true
         })
@@ -78,6 +101,11 @@ class PatientRegistrationForm extends Component{
                     <label className="standard-label">Phone Number:
                         <div>
                             <input className="standard-input" name="phone" onChange={this.onChangeHandler} value={this.state.phone}/>
+                        </div>
+                    </label>
+                    <label className="standard-label">Email:
+                        <div>
+                            <input className="standard-input" name="email" onChange={this.onChangeHandler} value={this.state.email}/>
                         </div>
                     </label>
                     <label className="standard-label">Image:
