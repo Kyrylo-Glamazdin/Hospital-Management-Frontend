@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import axios from 'axios';
+import {registerDoctor, registerPatient, addRelation, addSymptom, addTreatment} from './Actions';
 
 import MainPage from './Components/MainPage.js';
 
@@ -25,7 +27,7 @@ class App extends Component {
     this.loadDoctors = this.loadDoctors.bind(this);
     this.loadPatients = this.loadPatients.bind(this);
     this.loadSymptoms = this.loadSymptoms.bind(this);
-    this.loadDiagnoses = this.loadDiagnoses.bind(this);
+    this.loadTreatments = this.loadTreatments.bind(this);
     this.loadPatientDoctorRelations = this.loadPatientDoctorRelations.bind(this);
 
   }
@@ -36,29 +38,99 @@ class App extends Component {
     this.loadDoctors();
     this.loadPatients();
     this.loadSymptoms();
-    this.loadDiagnoses();
+    this.loadTreatments();
     this.loadPatientDoctorRelations();
   }
 
   //loads doctors info from the database
-  loadDoctors(){
-    //to be implemented once the database is set up
+  async loadDoctors(){
+    await axios.get('http://localhost:4100/api/doctors')
+    .then (res => {
+
+      let result = res.data;
+      for (let i = 0; i < result.length; i++){
+        let newDoctor = {
+          id: result[i].doctor_id,
+          name: result[i].doctor_name,
+          specialty: result[i].speciality,
+          department: result[i].doctor_dept,
+          phone: result[i].doctor_phone,
+          email: result[i].doctor_email,
+          image: result[i].doctor_img
+        }
+        this.props.registerDoctor(newDoctor);
+      }
+    })
+    .catch(err => console.log(err));
   }
   //loads patients info from the database
-  loadPatients(){
-    //to be implemented once the database is set up
+  async loadPatients(){
+    await axios.get('http://localhost:4100/api/patients')
+    .then (res => {
+
+      let result = res.data;
+      for (let i = 0; i < result.length; i++){
+        let newPatient = {
+          id: result[i].patient_id,
+          name: result[i].patient_name,
+          diagnosis: result[i].diagnosis,
+          department: result[i].patient_dept,
+          phone: result[i].patient_phone,
+          email: result[i].patient_email,
+          image: result[i].patient_img
+        }
+        this.props.registerPatient(newPatient);
+      }
+    })
+    .catch(err => console.log(err));
   }
   //loads patient symptoms from the database
-  loadSymptoms(){
+  async loadSymptoms(){
+    await axios.get('http://localhost:4100/api/symptoms')
+    .then (res => {
 
+      let result = res.data;
+      for (let i = 0; i < result.length; i++){
+        let newSymptom = {
+          id: result[i].patient_id,
+          symptom: result[i].symptom
+        }
+        this.props.addSymptom(newSymptom);
+      }
+    })
+    .catch(err => console.log(err));
   }
   //loads patient diagnoses from the database
-  loadDiagnoses(){
+  async loadTreatments(){
+    await axios.get('http://localhost:4100/api/treatments')
+    .then (res => {
 
+      let result = res.data;
+      for (let i = 0; i < result.length; i++){
+        let newTreatment = {
+          id: result[i].patient_id,
+          treatment: result[i].treatment
+        }
+        this.props.addTreatment(newTreatment);
+      }
+    })
+    .catch(err => console.log(err));
   }
   //loads relations between doctors and patients
-  loadPatientDoctorRelations(){
+  async loadPatientDoctorRelations(){
+    await axios.get('http://localhost:4100/api/doctorPatient')
+    .then (res => {
 
+      let result = res.data;
+      for (let i = 0; i < result.length; i++){
+        let newRelation = {
+          dId: result[i].doctor_id,
+          pId: result[i].patient_id
+        }
+        this.props.addRelation(newRelation);
+      }
+    })
+    .catch(err => console.log(err));
   }
 
   render(){
@@ -143,5 +215,9 @@ const mapStateToProps = state => {
 }
 
 export default connect (mapStateToProps, {
-
+  registerDoctor, 
+  registerPatient, 
+  addRelation, 
+  addSymptom, 
+  addTreatment
 })(App);

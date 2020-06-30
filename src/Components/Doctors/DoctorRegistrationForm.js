@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {registerDoctor} from '../../Actions';
 import {Redirect} from 'react-router';
 import '../../Styles/Doctors/DoctorRegistrationForm.css';
+import axios from 'axios';
 
 class DoctorRegistrationForm extends Component{
     constructor(props){
@@ -21,7 +22,7 @@ class DoctorRegistrationForm extends Component{
         this.onSubmitHandler = this.onSubmitHandler.bind(this);
     }
 
-    onSubmitHandler(event) {
+onSubmitHandler(event) {
         event.preventDefault();
 
         let updatedDoctorInfo = {
@@ -32,10 +33,24 @@ class DoctorRegistrationForm extends Component{
             email: this.state.email,
             image: this.state.image
         }
-        this.props.registerDoctor(updatedDoctorInfo);
 
-        // PUT request here
-        //not working, but works if the line above is commented out??
+        axios.post('http://localhost:4100/api/doctors', {
+            name: this.state.name,
+            specialty: this.state.specialty,
+            department: this.state.department,
+            phone: this.state.phone,
+            email: this.state.email,
+            image: this.state.image
+        })
+        .then(res => {
+            axios.get('http://localhost:4100/api/lastDocId')
+            .then(res => {
+                updatedDoctorInfo.id = res.data[0].lastId;
+                console.log(updatedDoctorInfo.id)
+                this.props.registerDoctor(updatedDoctorInfo);
+            })
+        })
+
         this.setState({
             redirect: true
         })

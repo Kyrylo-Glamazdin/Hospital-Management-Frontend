@@ -5,6 +5,7 @@ import {deleteDoctor} from '../../Actions';
 import {addRelation} from '../../Actions';
 import {deleteRelation} from '../../Actions';
 import {Redirect} from 'react-router';
+import axios from 'axios';
 import EditDoctorPatientList from './EditDoctorPatientList.js';
 import DoctorDropdownPatientCard from './DoctorDropdownPatientCard.js';
 import '../../Styles/Doctors/DoctorRegistrationForm.css';
@@ -60,8 +61,11 @@ class DoctorEditForm extends Component{
         }
         this.props.editDoctor(updatedDoctorInfo);
 
-        // PUT request here
-        //not working, but works if the line above is commented out??
+        axios.put('http://localhost:4100/api/doctors/' + updatedDoctorInfo.id, updatedDoctorInfo)
+        .then(res => {
+            console.log(res)
+        })
+
         this.setState({
             redirect: true
         })
@@ -76,6 +80,21 @@ class DoctorEditForm extends Component{
                 this.props.deleteRelation(oldRelationObj);
                 this.props.addRelation(newRelationObj);
             }
+            axios.put('http://localhost:4100/api/relations/' + this.props.doctor.id)
+                .then(res => {
+                    console.log(res);
+                })
+                axios.delete('http://localhost:4100/api/doctor/' + this.props.doctor.id)
+                .then(res => {
+                    console.log("cmoooon");
+                    this.props.deleteDoctor(this.props.doctor);
+                    this.setState({
+                        redirect: true
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         }
     }
 
@@ -200,10 +219,6 @@ class DoctorEditForm extends Component{
                     <input className="standard-doctor-edit-button" type="submit" value="Finish Editing"/>
                     <button className="standard-doctor-delete-button" onClick={() => {
                     this.deleteDoctorRelations();
-                    this.props.deleteDoctor(this.props.doctor);
-                    this.setState({
-                        redirect: true
-                    })
                     }}>Delete Doctor
                 </button>
                 </form>

@@ -3,60 +3,33 @@ import standard_doctor_image_1 from '../Styles/Images/standard_doc_img_1.png';
 import standard_patient_image_1 from '../Styles/Images/patient-standard-img.png';
 
 let doctors = [
-    {id: 1, name: "Doctor 1", specialty: "Neurologist", department: "Neurology", phone: "212-632-1923", email: "doctor@doctormail.com", image: standard_doctor_image_1},
-    {id: 2, name: "Doctor 2", specialty: "Dermatologist", department: "Dermatology", phone: "718-773-6236", email: "doctor@doctormail.com", image: standard_doctor_image_1},
-    {id: 3, name: "Doctor 3", specialty: "Psychologist", department: "Psychology" ,phone: "929-645-2145", email: "doctor@doctormail.com", image: standard_doctor_image_1},
-    {id: 4, name: "Doctor 4", specialty: "Surgeon", department: "Department of Surgery", phone: "347-153-7453", email: "doctor@doctormail.com", image: standard_doctor_image_1},
-    {id: 5, name: "Doctor 5", specialty: "Pediatrician", department: "Family Medicine", phone: "212-126-1753", email: "doctor@doctormail.com", image: standard_doctor_image_1}
 ];
 
 let patients = [
-    {id: 1, name: "Patient 1", diagnosis: "Cold", department: "Family Medicine", phone: "212-632-1923", image: standard_patient_image_1},
-    {id: 2, name: "Patient 2", diagnosis: "Anxiety Disorder", department: "Psychology", phone: "718-773-6236", image: standard_patient_image_1},
-    {id: 3, name: "Patient 3", diagnosis: "Tourette Syndrome", department: "Neurology", phone: "929-645-2145", image: standard_patient_image_1},
-    {id: 4, name: "Patient 4", diagnosis: "Idk", department: "Idk Dept", phone: "347-153-7453", image: standard_patient_image_1},
-    {id: 5, name: "Patient 5", diagnosis: "Idk2", department: "Idk2 Dept", phone: "212-126-1753", image: standard_patient_image_1}
 ];
 
 //patient ID is mapped to their symptom
 let symptoms = [
-    {id: 1, symptom: "Fever"},
-    {id: 1, symptom: "Tiredness"},
-    {id: 2, symptom: "Fear"},
-    {id: 3, symptom: "Speech Issues"},
-    {id: 2, symptom: "Tiredness"},
-    {id: 4, symptom: "S1"},
-    {id: 5, symptom: "S2"}
+    
 ];
 
 //patient ID is mapped to their treatment
 let treatments = [
-    {id: 1, treatment: "TR1"},
-    {id: 1, treatment: "TR2"},
-    {id: 1, treatment: "TR3"},
-    {id: 2, treatment: "TR1"},
-    {id: 2, treatment: "TR5"},
-    {id: 3, treatment: "TR5"},
-    {id: 4, treatment: "TR4"},
-    {id: 4, treatment: "TR6"},
+    
 ];
 
 //doctor id is mapped to patient id to see which patient is treated by which doctor
 let doctorPatientRelations = [
-    {dId: -1, pId: 3},
-    {dId: 1, pId: 4},
-    {dId: -1, pId: 5},
-    {dId: 5, pId: 1},
-    {dId: 3, pId: 2}
+   
 ];
 
-let nextDoctorId = 6;
-let nextPatientId = 6;
+let nextDoctorId = 1;
+let nextPatientId = 1;
 
 const doctorsReducer = (oldDoctors = doctors, action) => {
     switch(action.type){
         case "REGISTER_DOCTOR":
-            action.payload.id = nextDoctorId;
+            // action.payload.id = nextDoctorId;
             if (action.payload.image === ""){
                 action.payload.image = standard_doctor_image_1;
             }
@@ -79,7 +52,7 @@ const doctorsReducer = (oldDoctors = doctors, action) => {
 const patientsReducer = (oldPatients = patients, action) => {
     switch(action.type){
         case "REGISTER_PATIENT":
-            action.payload.id = nextPatientId;
+            // action.payload.id = nextPatientId;
             if (action.payload.image === ""){
                 action.payload.image = standard_patient_image_1;
             }
