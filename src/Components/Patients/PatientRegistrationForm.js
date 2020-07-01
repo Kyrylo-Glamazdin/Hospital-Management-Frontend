@@ -45,10 +45,8 @@ class PatientRegistrationForm extends Component{
             image: this.state.image
         })
         .then(res => {
-            console.log(res)
-        })
-
-        axios.get('http://localhost:4100/api/lastPatId')
+            console.log(res);
+            axios.get('http://localhost:4100/api/lastPatId')
         .then(res => {
             updatedPatientInfo.id = res.data[0].lastId;
             console.log(updatedPatientInfo.id)
@@ -61,6 +59,8 @@ class PatientRegistrationForm extends Component{
                 console.log(res)
             })
         })
+        })
+
 
         
         this.setState({

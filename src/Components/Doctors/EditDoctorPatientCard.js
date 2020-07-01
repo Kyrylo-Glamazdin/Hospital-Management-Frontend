@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {deleteRelation} from '../../Actions';
 import {addRelation} from '../../Actions';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 import '../../Styles/Doctors/EditDoctorPatientCard.css';
 
 class EditDoctorPatientCard extends Component{
@@ -27,10 +28,19 @@ class EditDoctorPatientCard extends Component{
                 </div>
                 <button className="edit-doctor-patient-card-remove-button" onClick={() => {
                     let relationObj = {dId: this.props.doctor.id, pId: this.props.patient.id}
-                    this.props.deleteRelation(relationObj);
                     let emptyRelation = {dId: -1, pId: this.props.patient.id}
                     this.props.addRelation(emptyRelation);
+                    this.props.deleteRelation(relationObj);
+                    // axios.post('http://localhost:4100/api/doctorPatients/', {emptyRelation})
+                    // .then(res => {
+                    // console.log(res);
+                    // axios.delete('http://localhost:4100/api/ralation/', relationObj)
+                    // .then(res => {
+                    // console.log(res);
+                    // })
+                    // });
                     this.props.undoPatientSelection();
+                    
                     }}>Remove From Doctor</button>
                 <div className="edit-doctor-patient-card-department">
                     Department: {this.props.patient.department}

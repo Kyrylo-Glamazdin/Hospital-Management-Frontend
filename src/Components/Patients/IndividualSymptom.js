@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {deleteSymptom} from '../../Actions'
+import '../../Styles/Patients/IndividualPatient.css';
 import symptom_image from '../../Styles/Images/symptom_default_image.jpg';
 
 class IndividualSymptom extends React.Component{
