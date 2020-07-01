@@ -150,16 +150,16 @@ class DoctorEditForm extends Component{
             let oldRelationObj = {dId: -1, pId: this.state.selectedPatients[i].id}
             this.props.deleteRelation(oldRelationObj);
             this.props.addRelation(newRelation);
-            axios.post('http://localhost:4100/api/doctorPatients/', {newRelation})
-                .then(res => {
-                    console.log(res);
-                    axios.delete('http://localhost:4100/api/ralation/', oldRelationObj)
+            axios.post('http://localhost:4100/api/ralation/', oldRelationObj)
                     .then(res => {
                     console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            axios.post('http://localhost:4100/api/reelation/', newRelation)
+                .then(res => {
+                    console.log(res);
                 })
 
         }

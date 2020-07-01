@@ -31,14 +31,14 @@ class EditDoctorPatientCard extends Component{
                     let emptyRelation = {dId: -1, pId: this.props.patient.id}
                     this.props.addRelation(emptyRelation);
                     this.props.deleteRelation(relationObj);
-                    // axios.post('http://localhost:4100/api/doctorPatients/', {emptyRelation})
-                    // .then(res => {
-                    // console.log(res);
-                    // axios.delete('http://localhost:4100/api/ralation/', relationObj)
-                    // .then(res => {
-                    // console.log(res);
-                    // })
-                    // });
+                    axios.post('http://localhost:4100/api/reelation/', emptyRelation)
+                    .then(res => {
+                    console.log(res);
+                    });
+                    axios.post('http://localhost:4100/api/ralation/', relationObj)
+                    .then(res => {
+                    console.log(res);
+                    });
                     this.props.undoPatientSelection();
                     
                     }}>Remove From Doctor</button>
