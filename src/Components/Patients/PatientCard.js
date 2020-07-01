@@ -22,6 +22,9 @@ class PatientCard extends Component{
                     </div>
                     <div className="doctor-specs-contact">
                         Phone Number: {this.props.patient.phone}
+                        <div>
+                            Email: {this.props.patient.email}
+                        </div>
                     </div>
                     <div className="doctor-card-buttons">
                         <Link className="doctor-link" to={"/patients/" + this.props.patient.id}>

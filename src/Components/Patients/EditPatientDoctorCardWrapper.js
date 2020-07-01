@@ -4,6 +4,7 @@ import {addRelation} from '../../Actions';
 import {deleteRelation} from '../../Actions';
 import EditPatientDoctorCard from './EditPatientDoctorCard.js';
 import PatientDropdownDoctorCard from './PatientDropdownDoctorCard.js';
+import axios from 'axios';
 import '../../Styles/Patients/PatientDropdownDoctorCard.css';
 
 class EditPatientDoctorCardWrapper extends Component{
@@ -39,10 +40,23 @@ class EditPatientDoctorCardWrapper extends Component{
             let newRelation = {dId: this.state.selectedDoctor.id, pId: this.props.patient.id};
             this.props.deleteRelation(emptyRelation);
             this.props.addRelation(newRelation);
-            this.setState({
-                showDoctors: false,
-                doctorsList: <div/>
-            })
+            
+            axios.post('http://localhost:4100/api/ralation/', emptyRelation)
+                    .then(res => {
+                    console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            axios.post('http://localhost:4100/api/reelation/', newRelation)
+                .then(res => {
+                    console.log(res);
+                    this.setState({
+                        showDoctors: false,
+                        doctorsList: <div/>
+                    })
+                })
+
         }
     }
 

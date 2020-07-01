@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {deleteRelation} from '../../Actions';
 import {addRelation} from '../../Actions';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 import '../../Styles/Doctors/EditDoctorPatientCard.css';
 import '../../Styles/Patients/EditPatientDoctorCard.css';
 
@@ -14,7 +15,7 @@ class EditPatientDoctorCard extends Component{
     render(){
         if (this.props.doctor === undefined){
             return(
-                <div>
+                <div className="no-assigned-doctor">
                     No Assigned Doctor
                 </div>
             );
@@ -36,11 +37,27 @@ class EditPatientDoctorCard extends Component{
                     </div>
 
                     <button className="edit-patient-edit-doctor-patient-card-remove-button" onClick={() => {
-                        let relationObj = {dId: this.props.doctor.id, pId: this.props.patient.id}
-                        this.props.deleteRelation(relationObj);
                         let emptyRelation = {dId: -1, pId: this.props.patient.id}
-                        this.props.addRelation(emptyRelation);
-                        this.props.undoDoctorSelection();
+                        let relationObj = {dId: this.props.doctor.id, pId: this.props.patient.id}
+
+                        // this.props.addRelation(emptyRelation);
+                        // this.props.deleteRelation(relationObj);
+
+                        axios.post('http://localhost:4100/api/ralation/', relationObj)
+                        .then(res => {
+                        console.log(res);
+                        })
+                        .catch(err => {
+                        console.log(err);
+                        })
+                        axios.post('http://localhost:4100/api/reelation/', emptyRelation)
+                        .then(res => {
+                            this.props.addRelation(emptyRelation);
+                            this.props.deleteRelation(relationObj);
+                            this.props.undoDoctorSelection();
+                        console.log(res);
+                        })
+
                         }}>Remove Doctor From Patient</button>
 
                     <div className="edit-doctor-patient-card-department">

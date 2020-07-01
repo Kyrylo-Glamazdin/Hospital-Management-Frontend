@@ -69,6 +69,21 @@ class PatientEditForm extends Component{
             let relationObj = patientRelation[0];
             this.props.deleteRelation(relationObj);
         }
+        axios.delete('http://localhost:4100/api/pRelation/' + this.props.patient.id)
+                .then(res => {
+                    console.log(res);
+                })
+                axios.delete('http://localhost:4100/api/patient/' + this.props.patient.id)
+                .then(res => {
+                    console.log("cmoooon");
+                    this.props.deletePatient(this.props.patient);
+                    this.setState({
+                        redirect: true
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
     }
 
     onChangeHandler(event){
@@ -151,10 +166,6 @@ class PatientEditForm extends Component{
                         <input className="patient-edit-confirm-button" type="submit" value="Finish Editing"/>
                         <button className="patient-edit-delete-button" onClick={() => {
                         this.deletePatientRelations();
-                        this.props.deletePatient(this.props.patient);
-                        this.setState({
-                            redirect: true
-                        })
                         }}>Discharge Patient</button>
                     </div>
                 </form>

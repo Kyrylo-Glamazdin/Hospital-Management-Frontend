@@ -45,6 +45,9 @@ class IndividualPatient extends Component{
                             <div className="contact-section">
                                 <div className="phone-num">
                                     Emergency Contact: {this.props.patient.phone}
+                                    <div>
+                                        Email: {this.props.patient.email}
+                                    </div>
                                 </div>
                             </div>
                         </div>

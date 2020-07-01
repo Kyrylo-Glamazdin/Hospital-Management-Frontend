@@ -147,9 +147,21 @@ class DoctorEditForm extends Component{
     finishPatientSelection(){
         for (let i = 0; i < this.state.selectedPatients.length; i++){
             let newRelation = {dId: this.props.doctor.id, pId: this.state.selectedPatients[i].id}
-            let oldRelation = {dId: -1, pId: this.state.selectedPatients[i].id}
+            let oldRelationObj = {dId: -1, pId: this.state.selectedPatients[i].id}
+            this.props.deleteRelation(oldRelationObj);
             this.props.addRelation(newRelation);
-            this.props.deleteRelation(oldRelation);
+            axios.post('http://localhost:4100/api/ralation/', oldRelationObj)
+                    .then(res => {
+                    console.log(res);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            axios.post('http://localhost:4100/api/reelation/', newRelation)
+                .then(res => {
+                    console.log(res);
+                })
+
         }
         this.setState({
             selectedPatients: [],

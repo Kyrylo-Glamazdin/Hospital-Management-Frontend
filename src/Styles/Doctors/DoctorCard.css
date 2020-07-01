@@ -13,9 +13,9 @@
 .doctor-image{
     display: inline-block;
     width: 150px;
-    height: 150px;
+    height: 180px;
     margin-top: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     margin-left: 2%;
 
     border-radius: 10px;
